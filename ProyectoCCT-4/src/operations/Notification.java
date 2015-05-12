@@ -1,7 +1,6 @@
 package operations;
 
 import java.util.*;  
-
 import javax.mail.*;  
 import javax.mail.internet.*;  
 
@@ -11,9 +10,8 @@ public class Notification {
 	
 	public void sendEmail(String to, String text) {		 
 		
-		
-		final String username = "notificacionescct@gmail.com";
-		final String password = "camaradecomercio";
+		final String username = "";
+		final String password = "";
 		Properties props = new Properties();
 		props.put("mail.smtp.auth", "true");
 		props.put("mail.smtp.starttls.enable", "true");
@@ -33,7 +31,7 @@ public class Notification {
 					Message message = new MimeMessage(session);
 					message.setRecipients(Message.RecipientType.TO,
 						InternetAddress.parse(to));
-					message.setSubject("Notificación acción sobre formato");
+					message.setSubject("NotificaciÃ³n- acciÃ³n sobre formato");
 					message.setText(text);
 		 
 					Transport.send(message);

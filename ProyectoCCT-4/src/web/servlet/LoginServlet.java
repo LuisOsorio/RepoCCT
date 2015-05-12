@@ -47,18 +47,11 @@ public class LoginServlet extends HttpServlet {
 		
 		if(conexionDB.connect()!=null) {
 			User userBD= conexionDB.getIfUserExists(user, password);
-			System.out.println("contraaa.. "+userBD.getPassword());
 			if(userBD!=null){
 				HttpSession session = request.getSession(false);
 				session.setAttribute("user", user);
 				session.setAttribute("process", userBD.getIdProcess());
 				session.setAttribute("leadProcess", userBD.getProcessLead());
-				session.setAttribute("sex", userBD.getSex());
-				session.setAttribute("nombre", userBD.getName());
-				session.setAttribute("contraseña", userBD.getPassword());
-				
-			
-				
 			    response.sendRedirect("WelPageLead.jsp");														
 				
 			}			

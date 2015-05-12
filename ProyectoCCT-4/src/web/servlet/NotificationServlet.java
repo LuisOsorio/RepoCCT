@@ -56,6 +56,8 @@ public class NotificationServlet extends HttpServlet {
 					out.println("<thead>");
 					out.println("<tr>");
 					out.println("<th>Nombre Formato</th>");
+					out.println("<th>Id Formato</th>");
+					out.println("<th>Id Proceso</th>");
 					out.println("<th>Versi&oacute;n</th>");
 					out.println("<th>Extension</th>");
 					out.println("<th>Acciones</th>");
@@ -67,6 +69,12 @@ public class NotificationServlet extends HttpServlet {
 						out.println("<tr>");
 						out.println("<td>");
 						out.println(format.getNameFormat());
+						out.println("</td>");
+						out.println("<td>");
+						out.println(format.getIdFormat());
+						out.println("</td>");
+						out.println("<td>");
+						out.println(format.getProcessId());
 						out.println("</td>");
 						out.println("<td>");
 						out.println(format.getVersion());
@@ -105,10 +113,10 @@ public class NotificationServlet extends HttpServlet {
 				String[] split=idFormat.split("_");
 				if(conexionDB.connect()!=null) {
 				Format format=conexionDB.getFormat(split[1], split[2]);
-				String from="D:/eclipse/workspace/ProyectoCCT-4/WebContent/formatos/"
+				String from="/Users/grille/Documents/webdevel/SGC/WebContent/formatos/"
 						+format.getProcessId()+"_pendiente"+"/"+format.getNameFormat()+"_"+format.getVersion()
 						+"."+format.getExtension();
-				String to="D:/eclipse/workspace/ProyectoCCT-4/WebContent/formatos/"
+				String to="/Users/grille/Documents/webdevel/SGC/WebContent/formatos/"
 						+format.getProcessId()+"/"+format.getNameFormat()+"_"+format.getVersion()+"."+format.getExtension();
 			
 					if("accept".equals(split[0])) {
