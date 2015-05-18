@@ -52,14 +52,34 @@
                  <%
                 }
               %>
-              <li><a href="#" id="tasks"><h4>Tareas</h4></a></li>
+              <li><a class="dropdown-toggle" data-toggle="dropdown" href="#" id="dropdown_task"><h4>Tareas</h4></a>
+             <ul class="dropdown-menu">
+             <li><a href="#" id="objective">Crear Objetivo</a></li>
+             <li><a href="#" id="strategy">Crear Estrategia</a></li>
+             <li><a href="#" id="activity">Crear Actividad</a></li>
+             <li><a href="#" id="task">Crear Tarea</a></li>
+             <li><a href="#" id="task">Consolidado de Actividades</a></li>                          
+              </ul>
+              </li>
               <li><a href="#"><h4>Cuenta</h4></a></li>
             </ul>
         </div>
          <div class="col-sm-9 col-md-10 main" id="content">
-         
-
-
+         <% 
+         if (session.getAttribute("result") != null) {
+        	 Boolean result=(Boolean)session.getAttribute("result");
+			if (result.booleanValue()) {
+				 %><label class='col-md-6 control-label'>Se ha guardado éxitosamente el contenido</label>
+				 <%
+				 session.removeAttribute("result");
+			} else {
+				%><label class='col-md-6 control-label'>Ha fallado la creación del contenido</label>			
+		    <% 
+		    session.removeAttribute("result");
+			}
+		
+		}
+         %>
         </div>
 
         </div>

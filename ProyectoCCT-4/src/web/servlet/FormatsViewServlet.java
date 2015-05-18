@@ -162,6 +162,7 @@ public class FormatsViewServlet extends HttpServlet {
 		} else if (loadCreateFormat!=null) {
 			session.setAttribute("action","create" );
 			request.getServletContext().getRequestDispatcher("/createFormat.jsp").forward(request, response);
+			  //response.sendRedirect("createFormat.jsp");
 		} else if(nombreFormat!=null) {
 			String actionFormat = (String) session.getAttribute("action");
 			if("create".equals(actionFormat)) {

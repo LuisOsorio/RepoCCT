@@ -193,6 +193,144 @@ public class ConexionDB {
 		
 		
 	}
+	public List<Strategy> getStrategies() {
+		List<Strategy> listStrategy=null;
+		String query = "select * from estrategia";
+		
+		ResultSet rs = null;
+
+		try {
+			stmt = conexion.createStatement();
+			rs = stmt.executeQuery(query);
+			if (rs != null) {
+				listStrategy = new ArrayList<Strategy>();
+				Strategy st = null;
+				while (rs.next()) {
+					String idObjective = rs.getString("id_estrategia");
+					String idStrategy= rs.getString("id_estrategia");
+					String description = rs.getString("descripcion");
+					st = new Strategy();
+					st.setDescription(description);
+					st.setIdObjective(idObjective);
+					st.setIdStrategy(idStrategy);
+					listStrategy.add(st);
+				}
+			} else {
+				System.out.println("No existen objetivos");
+			}
+
+		} catch (SQLException se) {
+			se.printStackTrace();
+		} catch (Exception e) {
+			// Handle errors for Class.forName
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				stmt.close();
+				//conexion.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.out.println("No se pudo cerrar la conexion");
+			}
+
+		}
+		
+		return listStrategy;
+		
+		
+	}
+	public List<Activity> getActivities() {
+		List<Activity> listAct=null;
+		String query = "select * from actividad";
+		
+		ResultSet rs = null;
+
+		try {
+			stmt = conexion.createStatement();
+			rs = stmt.executeQuery(query);
+			if (rs != null) {
+				listAct = new ArrayList<Activity>();
+				Activity act = null;
+				while (rs.next()) {
+					String idActividad = rs.getString("id_actividad");
+					String description = rs.getString("descripcion");
+					act = new Activity();
+					act.setIdActivity(idActividad);
+					act.setDescription(description);
+					listAct.add(act);
+				}
+			} else {
+				System.out.println("No existen objetivos");
+			}
+
+		} catch (SQLException se) {
+			se.printStackTrace();
+		} catch (Exception e) {
+			// Handle errors for Class.forName
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				stmt.close();
+				//conexion.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.out.println("No se pudo cerrar la conexion");
+			}
+
+		}
+		
+		return listAct;
+		
+		
+	}
+	public List<User> getLeads() {
+		List<User> userList=null;
+		String query = "select * from usuario where lider_proceso='Y'";
+		
+		ResultSet rs = null;
+
+		try {
+			stmt = conexion.createStatement();
+			rs = stmt.executeQuery(query);
+			if (rs != null) {
+				userList = new ArrayList<User>();
+				User us = null;
+				while (rs.next()) {
+					String email = rs.getString("email");
+					String name= rs.getString("nombre");
+					
+					us = new User();
+					us.setEmail(email);
+					us.setName(name);
+					userList.add(us);
+				}
+			} else {
+				System.out.println("No existen objetivos");
+			}
+
+		} catch (SQLException se) {
+			se.printStackTrace();
+		} catch (Exception e) {
+			// Handle errors for Class.forName
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				stmt.close();
+				//conexion.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.out.println("No se pudo cerrar la conexion");
+			}
+
+		}
+		
+		return userList;
+		
+		
+	}
 	public List<Strategy> getStrategiesByObjective(String objective) {
 		List<Strategy> listStrategies=null;
 		String query = "select * from estrategia where id_objetivo='"+objective+"';";
@@ -318,6 +456,62 @@ public class ConexionDB {
 
 		}
 		return listTasks;
+	}
+	public Boolean createObjetive(String idObjective, String descripcion) {
+		String query = "insert into objetivo values ('"+idObjective+"','"+descripcion+"');";
+		boolean success=true;
+		try {
+
+			stmt = conexion.createStatement();
+			stmt.executeUpdate(query);
+		} catch (SQLException se) {
+			se.printStackTrace();
+			success=false;
+		} catch (Exception e) {
+			// Handle errors for Class.forName
+			e.printStackTrace();
+			success=false;
+		}
+		return new Boolean(success);
+	}
+	public void createStrategy(String idStrategy, String idObjective , String descripcion) {
+		String query = "insert into estrategia values ('"+idStrategy+"','"+idObjective+"','"+descripcion+"');";
+		try {
+
+			stmt = conexion.createStatement();
+			stmt.executeUpdate(query);
+		} catch (SQLException se) {
+			se.printStackTrace();
+		} catch (Exception e) {
+			// Handle errors for Class.forName
+			e.printStackTrace();
+		}
+	}
+	public void createActivity(String idActivity, String idStrategy , String descripcion, String user) {
+		String query = "insert into actividad values ('"+idActivity+"','"+idStrategy+"','"+descripcion+"','"+user+"');";
+		try {
+
+			stmt = conexion.createStatement();
+			stmt.executeUpdate(query);
+		} catch (SQLException se) {
+			se.printStackTrace();
+		} catch (Exception e) {
+			// Handle errors for Class.forName
+			e.printStackTrace();
+		}
+	}
+	public void createTask(String idTask, String idActivity , String descripcion, String user) {
+		String query = "insert into tarea values ('"+idTask+"','"+idActivity+"','"+descripcion+"','"+user+"');";
+		try {
+
+			stmt = conexion.createStatement();
+			stmt.executeUpdate(query);
+		} catch (SQLException se) {
+			se.printStackTrace();
+		} catch (Exception e) {
+			// Handle errors for Class.forName
+			e.printStackTrace();
+		}
 	}
 	public void createPendingFormat(Format format, String userLastModi, String processId, String aproved) {
 		String query = "insert into formatos values ('" + format.getIdFormat() + "','" + format.getVersion() + "'," + " '"

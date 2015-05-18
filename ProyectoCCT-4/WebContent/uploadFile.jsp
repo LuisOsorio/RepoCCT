@@ -8,6 +8,7 @@
 <link href="css/styles.css" rel="stylesheet">
 <link href="http://hayageek.github.io/jQuery-Upload-File/uploadfile.min.css" rel="stylesheet">
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 <script src="https://rawgithub.com/hayageek/jquery-upload-file/master/js/jquery.uploadfile.min.js"></script>
 <script src="js/loadFormats.js"></script>
 <script src="js/notification.js"></script>
@@ -50,7 +51,15 @@
                  <%
                 }
               %>
-              <li><a href="#"><h4>Tareas</h4></a></li>
+              <li><a class="dropdown-toggle" data-toggle="dropdown" href="#" id="dropdown_task"><h4>Tareas</h4></a>
+             <ul class="dropdown-menu">
+             <li><a href="#" id="objective">Crear Objetivo</a></li>
+             <li><a href="#" id="strategy">Crear Estrategia</a></li>
+             <li><a href="#" id="activity">Crear Actividad</a></li>
+             <li><a href="#" id="task">Crear Tarea</a></li>
+             <li><a href="#" id="task">Consolidado de Actividades</a></li>                          
+              </ul>
+              </li>
               <li><a href="#"><h4>Cuenta</h4></a></li>
             </ul>
         </div>
@@ -97,13 +106,6 @@ $("#mulitplefileuploader").uploadFile(settings);
 
 </div>
 </div>
- 
-</body>
-</html>
-
-      
-
-       
  
 </body>
 </html>
